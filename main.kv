@@ -1,0 +1,133 @@
+<KeyCreationScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 30
+        padding: 50
+        Label:
+            text: 'Stvaranje ključeva'
+            font_size: 30
+        Button:
+            text: 'Tajni ključ'
+            font_size: 20
+        Button:
+            text: 'Javni ključ'
+            font_size: 20
+        Button:
+            text: 'Privatni ključ'
+            font_size: 20
+        Label:
+            text: ' '
+            font_size: 30
+        Button:
+            text: ' --> '
+            font_size: 30
+            on_press:
+                root.manager.current = 'kriptiranje'
+
+<EncryptionScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 30
+        padding: 50
+        Label:
+            text: 'Kriptiranje:'
+            font_size: 30
+        Button:
+            text: 'Simetričnim algoritmom'
+            font_size: 20
+        Button:
+            text: 'Asimetričnim algoritmom'
+            font_size: 20
+        Label:
+            text: ' '
+            font_size: 30
+        Button:
+            text: ' <-- '
+            font_size: 30
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'kljucevi'
+        Button:
+            text: ' --> '
+            font_size: 30
+            on_press:
+                root.manager.current = 'dekriptiranje'
+
+<DecryptionScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 30
+        padding: 50
+        Label:
+            text: 'Dekriptiranje:'
+            font_size: 30
+        Button:
+            text: 'Simetričnim algoritmom'
+            font_size: 20
+        Button:
+            text: 'Asimetričnim algoritmom'
+            font_size: 20
+        Label:
+            text: ' '
+            font_size: 30
+        Button:
+            text: ' <-- '
+            font_size: 30
+            on_press:
+                root.manager.current = 'kriptiranje'
+                root.manager.transition.direction = 'left'
+        Button:
+            text: ' --> '
+            font_size: 30
+            on_press:
+                root.manager.current = 'sazetak'
+
+<MessageHashCalculationScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 30
+        padding: 50
+        Label:
+            text: 'Izračunavanje sažetka:'
+            font_size: 30
+        Button:
+            text: 'Izračunaj'
+            font_size: 20
+        Label:
+            text: ' '
+            font_size: 30
+        Button:
+            text: ' <-- '
+            font_size: 30
+            on_press:
+                root.manager.current = 'dekriptiranje'
+                root.manager.transition.direction = 'left'
+        Button:
+            text: ' --> '
+            font_size: 30
+            on_press:
+                root.manager.current = 'potpis'
+
+<DigitalSignatureScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 30
+        padding: 50
+        Label:
+            text: 'Digitalni potpis:'
+            font_size: 30
+        Button:
+            text: 'Potpiši'
+            font_size: 20
+        Button:
+            text: 'Provjeri'
+            font_size: 20
+        Label:
+            text: ' '
+            font_size: 30
+        Button:
+            text: ' <-- '
+            font_size: 30
+            on_press:
+                root.manager.current = 'sazetak'
+                root.manager.transition.direction = 'left'
