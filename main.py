@@ -1,16 +1,17 @@
-from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.label import Label
-from kivy.uix.button import Button
-from kivy.lang import Builder
+from imports import *
 Builder.load_file('main.kv')
-from kivy.core.window import Window
 Window.size = (500, 500)
 
 class KeyCreationScreen(Screen):
-    pass
+    def secretKeyCreation(self):
+        secretKey = get_random_bytes(32)
+        print(secretKey)
+    def publicKeyCreation(self):
+        publicKey = get_random_bytes(32)
+        print(publicKey)
+    def privateKeyCreation(self):
+        privateKey = get_random_bytes(32)
+        print(privateKey)
 
 class EncryptionScreen(Screen):
     pass

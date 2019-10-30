@@ -9,12 +9,18 @@
         Button:
             text: 'Tajni ključ'
             font_size: 20
+            on_press:
+                root.secretKeyCreation()
         Button:
             text: 'Javni ključ'
             font_size: 20
+            on_press:
+                root.publicKeyCreation()
         Button:
             text: 'Privatni ključ'
             font_size: 20
+            on_press:
+                root.privateKeyCreation()
         Label:
             text: ' '
             font_size: 30
@@ -45,7 +51,6 @@
             text: ' <-- '
             font_size: 30
             on_press:
-                root.manager.transition.direction = 'left'
                 root.manager.current = 'kljucevi'
         Button:
             text: ' --> '
