@@ -3,15 +3,28 @@ Builder.load_file('main.kv')
 Window.size = (500, 500)
 
 class KeyCreationScreen(Screen):
+
     def secretKeyCreation(self):
         secretKey = get_random_bytes(32)
-        print(secretKey)
+        file_out = open("files/secretKey.txt", "wb")
+        file_out.write(secretKey)
+        file_out.close()
+        #cipher = AES.new(secretKey, AES.MODE_EAX)
+        print("Tajni ključ uspješno upisan u datoteku secretKey.txt")
+
     def publicKeyCreation(self):
-        publicKey = get_random_bytes(32)
-        print(publicKey)
+        publicKey = RSA.generate(2048)
+        file_out = open("files/publicKey.txt", "wb")
+        file_out.write(publicKey.publickey().export_key('PEM'))
+        file_out.close()
+        print("Javni ključ uspješno upisan u datoteku publicKey.txt")
+
     def privateKeyCreation(self):
-        privateKey = get_random_bytes(32)
-        print(privateKey)
+        privateKey = RSA.generate(2048)
+        file_out = open("files/privateKey.txt", "wb")
+        file_out.write(privateKey.export_key('PEM'))
+        file_out.close()
+        print("Privatni ključ uspješno upisan u datoteku privateKey.txt")
 
 class EncryptionScreen(Screen):
     pass
