@@ -10,4 +10,4 @@ from kivy.properties import ObjectProperty
 
 import base64
 from Crypto.Random import get_random_bytes
-from simplecrypto import RsaPublicKey, RsaKeypair
+from simplecrypto import encrypt, decrypt, RsaPublicKey, RsaKeypair, AesKey

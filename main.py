@@ -39,22 +39,34 @@ class EncryptionScreen(Screen):
 
     def encryptAES(self):
         file_in_text = open("files/message.txt", "r")
-        rawText = file_in_text.read()
+        text = file_in_text.read()
         file_in_text.close()
 
         file_in_key = open("files/secretKey.txt", "rb")
-        rawKey = file_in_key.read().decode("utf8")
+        key = AesKey(file_in_key.read())
         file_in_key.close()
 
-        #tu kod
+        message = key.encrypt(text)
 
-        file_out = open("files/encryptedAES.txt", "wb")
+        file_out = open("files/encryptedAES.txt", "w")
+        file_out.write(message)
+        file_out.close()
 
         print("Uspješno kriptirana poruka pohranjena u encryptedAES.txt")
-        print(citext)
 
 class DecryptionScreen(Screen):
-    pass
+    def decryptAES(self):
+        file_in_message = open("files/encryptedAES.txt", "r")
+        encryptedMessage = file_in_message.read()
+        file_in_message.close()
+
+        file_in_key = open("files/secretKey.txt", "rb")
+        key = AesKey(file_in_key.read())
+        file_in_key.close()
+
+        decryptedMessage = key.decrypt(encryptedMessage).decode("utf-8")
+
+        print("Poruka dekriptirana simetričnim algoritmom je: " + str(decryptedMessage))
 
 class MessageHashCalculationScreen(Screen):
     pass
