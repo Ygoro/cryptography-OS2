@@ -148,6 +148,8 @@
         Button:
             text: 'Izračunaj'
             font_size: 20
+            on_press:
+                root.writeHashToFile()
         Label:
             text: ' '
             font_size: 30
@@ -179,6 +181,8 @@
         Button:
             text: 'Potpiši'
             font_size: 20
+            on_press:
+                root.createDigitalSignature()
         Button:
             text: 'Provjeri'
             font_size: 20

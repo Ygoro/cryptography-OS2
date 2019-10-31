@@ -1,33 +1,37 @@
 from imports import *
-Builder.load_file('main.kv')
+
+Builder.load_file("main.kv")
 Window.size = (500, 500)
 
-def readMessageFromFile(self):
-    file_in_text = open("files/message.txt", "r")
-    text = file_in_text.read()
-    file_in_text.close()
+def ReadMessageFromFile(self):
+    f_text = open("files/message.txt", "r")
+    text = f_text.read()
+    f_text.close()
     return text
+
+def CalculateHash(self):
+    return hash(ReadMessageFromFile(self))
 
 class KeyCreationScreen(Screen):
 
     def createSecretKey(self):
         secretKey = get_random_bytes(32)
-        file_out = open("files/secretKey.txt", "wb")
-        file_out.write(secretKey)
-        file_out.close()
-        
+        f = open("files/secretKey.txt", "wb")
+        f.write(secretKey)
+        f.close()
+
         print("Tajni ključ uspješno upisan u datoteku secretKey.txt")
 
     def createRSAKeys(self):
         privateKey = RsaKeypair(2048)
-        file_out = open("files/privateKey.txt", "wb")
-        file_out.write(privateKey.serialize())
-        file_out.close()
+        f = open("files/privateKey.txt", "wb")
+        f.write(privateKey.serialize())
+        f.close()
 
         publicKey = privateKey.publickey
-        file_out = open("files/publicKey.txt", "wb")
-        file_out.write(publicKey.serialize())
-        file_out.close()
+        f = open("files/publicKey.txt", "wb")
+        f.write(publicKey.serialize())
+        f.close()
 
         print("Javni i privatni ključ uspješno upisani u datoteke publicKey.txt i privateKey.txt")
 
@@ -35,64 +39,64 @@ class InputEncryptionScreen(Screen):
 
     def encryptTextInput(self):
          input = self.ids.my_textinput.text
-         file_out = open("files/message.txt", "w")
-         file_out.write(input)
-         file_out.close()
+         f = open("files/message.txt", "w")
+         f.write(input)
+         f.close()
          print("Poruka uspješno upisana u datoteku message.txt")
 
 class EncryptionScreen(Screen):
 
     def encryptAES(self):
-        text = readMessageFromFile(self)
-        file_in_key = open("files/secretKey.txt", "rb")
-        key = AesKey(file_in_key.read())
-        file_in_key.close()
+        text = ReadMessageFromFile(self)
+        f_key = open("files/secretKey.txt", "rb")
+        key = AesKey(f_key.read())
+        f_key.close()
 
         encryptedMessage = key.encrypt(text)
 
-        file_out = open("files/encryptedAES.txt", "w")
-        file_out.write(encryptedMessage)
-        file_out.close()
+        f_aes = open("files/encryptedAES.txt", "w")
+        f_aes.write(encryptedMessage)
+        f_aes.close()
 
         print("Uspješno kriptirana poruka pohranjena je u datoteku encryptedAES.txt")
 
     def encryptRSA(self):
-        text = readMessageFromFile(self)
-        file_in_key = open("files/publicKey.txt", "rb")
-        key = RsaPublicKey(file_in_key.read())
-        file_in_key.close()
+        text = ReadMessageFromFile(self)
+        f_key = open("files/publicKey.txt", "rb")
+        key = RsaPublicKey(f_key.read())
+        f_key.close()
 
         encryptedMessage = key.encrypt(text)
 
-        file_out = open("files/encryptedRSA.txt", "w")
-        file_out.write(encryptedMessage)
-        file_out.close()
+        f_rsa = open("files/encryptedRSA.txt", "w")
+        f_rsa.write(encryptedMessage)
+        f_rsa.close()
 
         print("Uspješno kriptirana poruka pohranjena je u datoteku encryptedRSA.txt")
 
 class DecryptionScreen(Screen):
 
     def decryptAES(self):
-        file_in_message = open("files/encryptedAES.txt", "r")
-        encryptedMessage = file_in_message.read()
-        file_in_message.close()
+        f_message = open("files/encryptedAES.txt", "r")
+        encryptedMessage = f_message.read()
+        f_message.close()
 
-        file_in_key = open("files/secretKey.txt", "rb")
-        key = AesKey(file_in_key.read())
-        file_in_key.close()
+        f_key = open("files/secretKey.txt", "rb")
+        key = AesKey(f_key.read())
+        f_key.close()
 
         decryptedMessage = key.decrypt(encryptedMessage).decode("utf-8")
 
         print("Poruka dekriptirana simetričnim algoritmom je: " + str(decryptedMessage))
 
     def decryptRSA(self):
-        file_in_message = open("files/encryptedRSA.txt", "r")
-        encryptedMessage = file_in_message.read()
-        file_in_message.close()
+        f_message = open("files/encryptedRSA.txt", "r")
+        encryptedMessage = f_message.read()
+        f_message.close()
 
-        file_in_key = open("files/privateKey.txt", "r")
-        key = RsaKeypair(file_in_key.read())
-        file_in_key.close()
+        f_key = open("files/privateKey.txt", "r")
+        key = RsaKeypair(f_key.read())
+        f_key.close()
 
         decryptedMessage = key.decrypt(encryptedMessage).decode("utf-8")
 
@@ -100,11 +104,29 @@ class DecryptionScreen(Screen):
 
 class MessageHashCalculationScreen(Screen):
 
-    def calculateHash(self):
-        print("")
+    def writeHashToFile(self):
+        calculatedHash = CalculateHash(self)
+        f_hash = open("files/hash.txt", "w")
+        f_hash.write(calculatedHash)
+        f_hash.close()
+
+        print("Uspješno kreiran sažetak SHA-256 algoritmom nalazi se u datoteci hash.txt")
 
 class DigitalSignatureScreen(Screen):
-    pass
+
+    def createDigitalSignature(self):
+        calculatedHash = CalculateHash(self)
+        f_key = open("files/privateKey.txt", "r")
+        key = RsaKeypair(f_key.read())
+        f_key.close()
+
+        digitalSignature = key.encrypt(calculatedHash)
+
+        f_signature = open("files/digitalSignature.txt", "w")
+        encryptedMessage = f_signature.write(digitalSignature)
+        f_signature.close()
+
+        print("Uspješno kreiran digitalni potpis nalazi se u datoteci digitalSignature.txt")
 
 sm = ScreenManager(transition=NoTransition())
 sm.add_widget(KeyCreationScreen(name='kljucevi'))
