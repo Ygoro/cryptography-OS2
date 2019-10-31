@@ -26,6 +26,9 @@ class KeyCreationScreen(Screen):
         file_out.close()
         print("Privatni ključ uspješno upisan u datoteku privateKey.txt")
 
+class EncryptionInputScreen(Screen):
+    pass
+
 class EncryptionScreen(Screen):
     pass
 
@@ -40,6 +43,7 @@ class DigitalSignatureScreen(Screen):
 
 sm = ScreenManager()
 sm.add_widget(KeyCreationScreen(name='kljucevi'))
+sm.add_widget(EncryptionInputScreen(name='tekst'))
 sm.add_widget(EncryptionScreen(name='kriptiranje'))
 sm.add_widget(DecryptionScreen(name='dekriptiranje'))
 sm.add_widget(MessageHashCalculationScreen(name='sazetak'))

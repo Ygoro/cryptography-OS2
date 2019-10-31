@@ -28,6 +28,35 @@
             text: ' --> '
             font_size: 30
             on_press:
+                root.manager.current = 'tekst'
+
+<EncryptionInputScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 30
+        padding: 50
+        Label:
+            text: 'Tekst za kriptiranje'
+            font_size: 30
+        TextInput:
+            allow_copy: True
+            cursor_blink: True
+            hint_text: 'Ovdje unesite tekst...'
+            text_language: 'hr'
+            write_tab: False
+            font_size: 18
+        Button:
+            text: 'Kriptiraj'
+            font_size: 20
+        Button:
+            text: ' <-- '
+            font_size: 30
+            on_press:
+                root.manager.current = 'kljucevi'
+        Button:
+            text: ' --> '
+            font_size: 30
+            on_press:
                 root.manager.current = 'kriptiranje'
 
 <EncryptionScreen>:
@@ -51,7 +80,7 @@
             text: ' <-- '
             font_size: 30
             on_press:
-                root.manager.current = 'kljucevi'
+                root.manager.current = 'tekst'
         Button:
             text: ' --> '
             font_size: 30
