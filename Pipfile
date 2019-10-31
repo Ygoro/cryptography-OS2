@@ -7,7 +7,7 @@ verify_ssl = true
 
 [packages]
 kivy = "*"
-pycryptodome = "*"
+simplecrypto = "*"
 
 [requires]
 python_version = "3.7"

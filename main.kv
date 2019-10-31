@@ -10,17 +10,17 @@
             text: 'Tajni ključ'
             font_size: 20
             on_press:
-                root.secretKeyCreation()
+                root.createSecretKey()
         Button:
             text: 'Javni ključ'
             font_size: 20
             on_press:
-                root.publicKeyCreation()
+                root.createPublicKey()
         Button:
             text: 'Privatni ključ'
             font_size: 20
             on_press:
-                root.privateKeyCreation()
+                root.createPrivateKey()
         Label:
             text: ' '
             font_size: 30
@@ -30,7 +30,7 @@
             on_press:
                 root.manager.current = 'tekst'
 
-<EncryptionInputScreen>:
+<InputEncryptionScreen>:
     BoxLayout:
         orientation: 'vertical'
         spacing: 30
@@ -39,25 +39,35 @@
             text: 'Tekst za kriptiranje'
             font_size: 30
         TextInput:
+            id: my_textinput
             allow_copy: True
             cursor_blink: True
+            focus: True
             hint_text: 'Ovdje unesite tekst...'
             text_language: 'hr'
             write_tab: False
             font_size: 18
         Button:
-            text: 'Kriptiraj'
+            text: 'Upiši u datoteku'
             font_size: 20
-        Button:
-            text: ' <-- '
-            font_size: 30
             on_press:
-                root.manager.current = 'kljucevi'
-        Button:
-            text: ' --> '
+                root.encryptTextInput()
+        Label:
+            text: ' '
             font_size: 30
-            on_press:
-                root.manager.current = 'kriptiranje'
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: 30
+            Button:
+                text: ' <-- '
+                font_size: 30
+                on_press:
+                    root.manager.current = 'kljucevi'
+            Button:
+                text: ' --> '
+                font_size: 30
+                on_press:
+                    root.manager.current = 'kriptiranje'
 
 <EncryptionScreen>:
     BoxLayout:
@@ -70,22 +80,27 @@
         Button:
             text: 'Simetričnim algoritmom'
             font_size: 20
+            on_press:
+                root.encryptAES()
         Button:
             text: 'Asimetričnim algoritmom'
             font_size: 20
         Label:
             text: ' '
             font_size: 30
-        Button:
-            text: ' <-- '
-            font_size: 30
-            on_press:
-                root.manager.current = 'tekst'
-        Button:
-            text: ' --> '
-            font_size: 30
-            on_press:
-                root.manager.current = 'dekriptiranje'
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: 30
+            Button:
+                text: ' <-- '
+                font_size: 30
+                on_press:
+                    root.manager.current = 'tekst'
+            Button:
+                text: ' --> '
+                font_size: 30
+                on_press:
+                    root.manager.current = 'dekriptiranje'
 
 <DecryptionScreen>:
     BoxLayout:
@@ -104,16 +119,19 @@
         Label:
             text: ' '
             font_size: 30
-        Button:
-            text: ' <-- '
-            font_size: 30
-            on_press:
-                root.manager.current = 'kriptiranje'
-        Button:
-            text: ' --> '
-            font_size: 30
-            on_press:
-                root.manager.current = 'sazetak'
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: 30
+            Button:
+                text: ' <-- '
+                font_size: 30
+                on_press:
+                    root.manager.current = 'kriptiranje'
+            Button:
+                text: ' --> '
+                font_size: 30
+                on_press:
+                    root.manager.current = 'sazetak'
 
 <MessageHashCalculationScreen>:
     BoxLayout:
@@ -129,16 +147,22 @@
         Label:
             text: ' '
             font_size: 30
-        Button:
-            text: ' <-- '
+        Label:
+            text: ' '
             font_size: 30
-            on_press:
-                root.manager.current = 'dekriptiranje'
-        Button:
-            text: ' --> '
-            font_size: 30
-            on_press:
-                root.manager.current = 'potpis'
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: 30
+            Button:
+                text: ' <-- '
+                font_size: 30
+                on_press:
+                    root.manager.current = 'dekriptiranje'
+            Button:
+                text: ' --> '
+                font_size: 30
+                on_press:
+                    root.manager.current = 'potpis'
 
 <DigitalSignatureScreen>:
     BoxLayout:
@@ -154,6 +178,9 @@
         Button:
             text: 'Provjeri'
             font_size: 20
+        Label:
+            text: ' '
+            font_size: 30
         Label:
             text: ' '
             font_size: 30
