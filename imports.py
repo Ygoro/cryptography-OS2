@@ -8,6 +8,5 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 
-import base64
 from Crypto.Random import get_random_bytes
-from simplecrypto import encrypt, decrypt, RsaPublicKey, RsaKeypair, AesKey
+from simplecrypto import encrypt, decrypt, RsaKeypair, AesKey, RsaPublicKey, hash

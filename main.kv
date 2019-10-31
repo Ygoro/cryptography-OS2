@@ -12,15 +12,13 @@
             on_press:
                 root.createSecretKey()
         Button:
-            text: 'Javni ključ'
+            text: 'Javni i privatni ključ'
             font_size: 20
             on_press:
-                root.createPublicKey()
-        Button:
-            text: 'Privatni ključ'
-            font_size: 20
-            on_press:
-                root.createPrivateKey()
+                root.createRSAKeys()
+        Label:
+            text: ' '
+            font_size: 30
         Label:
             text: ' '
             font_size: 30
@@ -85,6 +83,8 @@
         Button:
             text: 'Asimetričnim algoritmom'
             font_size: 20
+            on_press:
+                root.encryptRSA()
         Label:
             text: ' '
             font_size: 30
@@ -118,6 +118,8 @@
         Button:
             text: 'Asimetričnim algoritmom'
             font_size: 20
+            on_press:
+                root.decryptRSA()
         Label:
             text: ' '
             font_size: 30
