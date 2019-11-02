@@ -120,13 +120,30 @@ class DigitalSignatureScreen(Screen):
         key = RsaKeypair(f_key.read())
         f_key.close()
 
-        digitalSignature = key.encrypt(calculatedHash)
+        digitalSignature = key.sign(calculatedHash)
 
-        f_signature = open("files/digitalSignature.txt", "w")
-        encryptedMessage = f_signature.write(digitalSignature)
+        f_signature = open("files/digitalSignature.txt", "wb")
+        f_signature.write(digitalSignature)
         f_signature.close()
 
         print("Uspješno kreiran digitalni potpis nalazi se u datoteci digitalSignature.txt")
+
+    def checkDigitalSignature(self):
+        calculatedHash = CalculateHash(self)
+        f_key = open("files/publicKey.txt", "rb")
+        key = RsaPublicKey(f_key.read())
+        f_key.close()
+
+        f_signature = open("files/digitalSignature.txt", "rb")
+        digitalSignature = f_signature.read()
+        f_signature.close()
+
+        validSignature = key.verify(calculatedHash, digitalSignature)
+
+        if(validSignature == True):
+            print("Potpis je valjan.")
+        else:
+            print("Potpis nije valjan.")
 
 sm = ScreenManager(transition=NoTransition())
 sm.add_widget(KeyCreationScreen(name='kljucevi'))
