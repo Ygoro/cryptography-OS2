@@ -110,7 +110,7 @@ class MessageHashCalculationScreen(Screen):
         f_hash.write(calculatedHash)
         f_hash.close()
 
-        print("Uspješno kreiran sažetak SHA-256 algoritmom nalazi se u datoteci hash.txt")
+        print("Uspješno kreiran sažetak SHA-256 funkcijom nalazi se u datoteci hash.txt")
 
 class DigitalSignatureScreen(Screen):
 
