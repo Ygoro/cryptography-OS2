@@ -10,6 +10,11 @@ Sve funkcionalnosti aplikacije u nastavku su označene **ovako**, dok su sve dat
 
 1. Aplikacija se u virtualnom okruženju pokreće pozicioniranjem u klonirani direktorij i pokretanjem _**main.py**_.
 
+```
+pipenv shell /mjesto/kloniranog/direktorija
+python main.py
+```
+
 2. Pokretanjem aplikacije dolazi se do početnog sučelja na kojem je moguće pritiskom na gumbe _Tajni ključ_ i _Javni i privatni ključ_ **stvoriti nove ključeve za kriptiranje** (ključevi će biti smješteni u datoteke _secretKey.txt_, _publicKey.txt_ i _privateKey.txt).
 
 ![Snimka zaslona za generiranje ključeva](https://i.imgur.com/gWFKH52.png)
