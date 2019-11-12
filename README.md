@@ -11,7 +11,9 @@ Sve funkcionalnosti aplikacije u nastavku su označene **ovako**, dok su sve dat
 1. Aplikacija se u virtualnom okruženju pokreće pozicioniranjem u klonirani direktorij i pokretanjem _**main.py**_.
 
 ```
-pipenv shell /mjesto/kloniranog/direktorija
+cd /mjesto/kloniranog/direktorija
+pipenv shell
+pipenv install
 python main.py
 ```
 
